@@ -1,89 +1,72 @@
-# jenkins-pipeline-linter-connector README
+# jenkins-pipeline-linter-connector
 
-This extension validates Jenkinsfiles by sending them to the Pipeline Linter of a Jenkins server.
+This extension validates Jenkinsfile by sending them to the [Jenkins Pipeline Linter](https://www.jenkins.io/doc/book/pipeline/development/#linter) of a Jenkins server.
 
 ## Features
 
-- Validate Jenkinsfiles from wihin vscode.
-- Supports declarative pipeline only.
+- Validate [declarative Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline) in [Visual Studio Code](https://code.visualstudio.com/).
 
-## Examples
+## Example Usage
 
-![Example 1](images/example1.gif)
+![Example](images/example.gif)
 
-![Example 2](images/example2.gif)
+![Example with syntax error](images/example_with_syntax_error.gif)
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
-* `jenkins.pipeline.linter.connector.url`: Url of the Jenkins Pipeline Linter.
-* `jenkins.pipeline.linter.connector.crumbUrl`: Url of the Jenkins Crumb Issuer.
-* `jenkins.pipeline.linter.connector.pass`: Jenkins password (can be left blank if you don't want to put your password in your settings).
-* `jenkins.pipeline.linter.connector.token`: Jenkins token (can be left blank if you don't want to put your token in your settings).
-* `jenkins.pipeline.linter.connector.user`: Jenkins username.
-* `jenkins.pipeline.linter.connector.strictssl`: Set to false to allow invalid ssl connections.
+* `jenkins.pipeline.linter.connector.url`: is the endpoint at which your Jenkins Server expects the POST request, containing your Jenkinsfile which you want to validate. Typically this points to `<your_jenkins_server:port>/pipeline-model-converter/validate`.
+* `jenkins.pipeline.linter.connector.crumbUrl`: has to be specified if your Jenkins Server has CRSF protection enabled. (eg: `https://<your-jenkins-server>:<port>/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)`).
+* `jenkins.pipeline.linter.connector.user`: allows you to specify your Jenkins username.
+* `jenkins.pipeline.linter.connector.pass`: allows you to specify your Jenkins password.
+* `jenkins.pipeline.linter.connector.token`: Jenkins [user API token](https://www.baeldung.com/ops/jenkins-api-token).
+* `jenkins.pipeline.linter.onsave`: Controls whether the Jenkinsfile is checked immediately after it is saved (default: false).
 
-## Contributors
+### example settings
 
-* [Asif Kamran Malick](https://github.com/akmalick)
-* [backbasejeff](https://github.com/backbasejeff)
-* [Blake Easley](https://github.com/Jimmyscene)
-* [Draco Boreus](https://github.com/dracoBoreus)
-* [Tomáš Hartmann](https://github.com/cvakiitho)
+Scenario 1: Jenkins does not have API authentication enabled
 
-## Release Notes
+```json
+{
+    "jenkins.pipeline.linter.connector.url": "https://jenkins.shan333.cn/pipeline-model-converter/validate",
+}
+```
 
-### 1.2.0
-Added token based authentication.
+Scenario 2: Jenkins has API authentication enabled. Use a password for authentication.
 
-### 1.1.7
-Fixed error in readme.
+```json
+{
+    "jenkins.pipeline.linter.connector.url": "https://jenkins.shan333.cn/pipeline-model-converter/validate",
+    "jenkins.pipeline.linter.connector.user": "jenkins_username",
+    "jenkins.pipeline.linter.connector.pass": "jenkins_password",
+    "jenkins.pipeline.linter.connector.token": "user_api_token"
+}
+```
 
-### 1.1.6
+Scenario 3: Jenkins has API authentication enabled. Use a API token for authentication.
 
-Clear output before run.
+```json
+{
+    "jenkins.pipeline.linter.connector.url": "https://jenkins.shan333.cn/pipeline-model-converter/validate",
+    "jenkins.pipeline.linter.connector.user": "jenkins_username",
+    "jenkins.pipeline.linter.connector.token": "user_api_token"
+}
+```
 
-### 1.1.5
+Scenario 4: Jenkins has API authentication enabled and CRSF protection enabled.
 
-Mask manual password input.
+```json
+{
+    "jenkins.pipeline.linter.connector.url": "https://jenkins.shan333.cn/pipeline-model-converter/validate",
+    "jenkins.pipeline.linter.connector.user": "jenkins_username",
+    "jenkins.pipeline.linter.connector.pass": "jenkins_password",
+    "jenkins.pipeline.linter.connector.token": "user_api_token",
+    "jenkins.pipeline.linter.connector.crumbUrl": "https://jenkins.shan333.cn/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"
+}
+```
 
-### 1.1.4
+## Acknowledgements
 
-Added possibility to leave password option blank, when setting user name.
-
-### 1.1.3
-
-Added option to disable strict ssl validation.
-
-### 1.1.2
-
-Changed readme.
-
-### 1.1.1
-
-Changed dependency of url-parse for potential security problem.
-
-### 1.1.0
-
-Added the possibility to add the crumbUrl for Jenkins installations with active CRSF protection.
-
-### 1.0.4
-
-Changed output channel.
-
-### 1.0.3
-
-Bugfixes.
-
-### 1.0.2
-
-Bugfixes.
-
-### 1.0.1
-
-Bugfixes.
-
-### 1.0.0
-
-Initial release of jenkins-pipeline-linter-connector.
+- [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
+- Project modified from: [https://github.com/4roring/vscode-jenkins-pipeline-linter-connector](https://github.com/4roring/vscode-jenkins-pipeline-linter-connector)

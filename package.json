@@ -1,14 +1,14 @@
 {
     "name": "jenkins-pipeline-linter-connector-fork",
     "displayName": "Jenkins Pipeline Linter Connector (fork)",
-    "description": "Validates Jenkinsfiles by sending them to the Pipeline Linter of a Jenkins server.",
-    "version": "1.2.0",
+    "description": "Validates Jenkinsfile by sending them to the Pipeline Linter of a Jenkins server.",
+    "version": "2.0.0",
     "icon": "images/icon.png",
-    "publisher": "janjoerke",
+    "publisher": "yeshan333",
     "license": "LICENSE.txt",
     "repository": {
         "type": "git",
-        "url": "https://github.com/janjoerke/vscode-jenkins-pipeline-linter-connector.git"
+        "url": "https://github.com/yeshan333/vscode-jenkins-pipeline-linter-connector.git"
     },
     "engines": {
         "vscode": "^1.89.0"
@@ -37,58 +37,57 @@
             "properties": {
                 "jenkins.pipeline.linter.connector.url": {
                     "type": "string",
-                    "description": "Linter url (i.e. http://<your_jenkins_server:port>/pipeline-model-converter/validate)"
+                    "description": "the endpoint at which your Jenkins Server expects the POST request, containing your Jenkinsfile which you want to validate. Typically this points to `<your_jenkins_server:port>/pipeline-model-converter/validate`"
                 },
                 "jenkins.pipeline.linter.connector.user": {
                     "type": "string",
-                    "description": "Username"
+                    "description": "Jenkins username"
                 },
                 "jenkins.pipeline.linter.connector.pass": {
                     "type": "string",
-                    "description": "Password (can be left blank if you don't want to put your password in your settings)"
+                    "description": "Jenkins User Password"
                 },
                 "jenkins.pipeline.linter.connector.token": {
                     "type": "string",
-                    "description": "Token (can be left blank if you don't want to put your token in your settings)"
+                    "description": "Jenkins user API token."
                 },
                 "jenkins.pipeline.linter.connector.crumbUrl": {
                     "type": "string",
-                    "description": "The url of the crumb service (i.e. http://<your_jenkins_server:port>/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb))"
-                },
-                "jenkins.pipeline.linter.connector.strictssl": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Set to false to allow invalid ssl connections"
+                    "description": "The url of the crumb service (i.e. http://<your_jenkins_server:port>/crumbIssuer/api/xml/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"
                 },
                 "jenkins.pipeline.linter.onsave": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Check lint when save"
+                    "description": "lint when Jenkinsfile save"
                 },
                 "jenkins.pipeline.linter.checkextensions": {
                     "type": "array",
-                    "default": [".jenkinsfile", ".groovy", "Jenkinsfile"],
+                    "default": [
+                        ".jenkinsfile",
+                        ".groovy",
+                        "Jenkinsfile"
+                    ],
                     "description": "Set lint file extension list"
                 }
             }
         }
     },
     "scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"lint": "eslint \"src/**/*.ts\"",
-		"watch": "tsc -watch -p ./"
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "eslint \"src/**/*.ts\"",
+        "watch": "tsc -watch -p ./"
     },
     "devDependencies": {
-		"@types/node": "^18",
-		"@types/vscode": "^1.89.0",
-		"@typescript-eslint/eslint-plugin": "^6.7.0",
-		"@typescript-eslint/parser": "^6.7.0",
-		"eslint": "^8.26.0",
-		"typescript": "^5.4.2"
+        "@types/node": "^18",
+        "@types/vscode": "^1.89.0",
+        "@typescript-eslint/eslint-plugin": "^6.7.0",
+        "@typescript-eslint/parser": "^6.7.0",
+        "eslint": "^8.26.0",
+        "typescript": "^5.4.2"
     },
     "dependencies": {
-        "request": "^2.88.0",
-        "url-parse": "^1.4.3"
+        "axios": "^1.6.8",
+        "form-data": "^4.0.0"
     }
 }

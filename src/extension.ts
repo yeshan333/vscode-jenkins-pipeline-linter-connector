@@ -113,6 +113,9 @@ function validateRequest(fs: any, request: any, url: string, user: string|undefi
                 headers: {}
             };
 
+            console.log("===============")
+            console.log(chunks.join())
+
             if(crumb !== undefined && crumb.length > 0) {
                 let crumbSplit = crumb.split(':');
                 options.headers = Object.assign(options.headers, {'Jenkins-Crumb': crumbSplit[1]});
@@ -131,6 +134,9 @@ function validateRequest(fs: any, request: any, url: string, user: string|undefi
             }
 
             request(options, (err: any, httpResponse: any, body: any) => {
+                console.log(options)
+                console.log(err)
+                console.log(body)
                 if (err) {
                     output.appendLine(err);
                 } else {

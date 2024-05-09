@@ -1,6 +1,6 @@
 {
-    "name": "jenkins-pipeline-linter-connector",
-    "displayName": "Jenkins Pipeline Linter Connector",
+    "name": "jenkins-pipeline-linter-connector-fork",
+    "displayName": "Jenkins Pipeline Linter Connector (fork)",
     "description": "Validates Jenkinsfiles by sending them to the Pipeline Linter of a Jenkins server.",
     "version": "1.2.0",
     "icon": "images/icon.png",
@@ -11,13 +11,10 @@
         "url": "https://github.com/janjoerke/vscode-jenkins-pipeline-linter-connector.git"
     },
     "engines": {
-        "vscode": "^1.25.0"
+        "vscode": "^1.89.0"
     },
     "categories": [
         "Other"
-    ],
-    "activationEvents": [
-        "onCommand:jenkins.pipeline.linter.connector.validate"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -36,7 +33,7 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "Jenkins Pipeline Linter Connector",
+            "title": "Jenkins Pipeline Linter Connector (fork)",
             "properties": {
                 "jenkins.pipeline.linter.connector.url": {
                     "type": "string",
@@ -70,26 +67,25 @@
                 },
                 "jenkins.pipeline.linter.checkextensions": {
                     "type": "array",
-                    "default": [".jenkinsfile", ".groovy"],
+                    "default": [".jenkinsfile", ".groovy", "Jenkinsfile"],
                     "description": "Set lint file extension list"
                 }
             }
         }
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -watch -p ./"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
-        "node.extend": ">=1.1.7",
-        "tslint": "^5.8.0",
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.36"
+		"@types/node": "^18",
+		"@types/vscode": "^1.89.0",
+		"@typescript-eslint/eslint-plugin": "^6.7.0",
+		"@typescript-eslint/parser": "^6.7.0",
+		"eslint": "^8.26.0",
+		"typescript": "^5.4.2"
     },
     "dependencies": {
         "request": "^2.88.0",

@@ -1,5 +1,9 @@
 # Change Log
 
+### 2.0.0
+
+Refactor core logic.
+
 ### 1.2.0
 Added token based authentication.
 

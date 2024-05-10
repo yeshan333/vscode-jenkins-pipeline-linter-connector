@@ -21,7 +21,8 @@ This extension contributes the following settings:
 * `jenkins.pipeline.linter.connector.user`: allows you to specify your Jenkins username.
 * `jenkins.pipeline.linter.connector.pass`: allows you to specify your Jenkins password.
 * `jenkins.pipeline.linter.connector.token`: Jenkins [user API token](https://www.baeldung.com/ops/jenkins-api-token).
-* `jenkins.pipeline.linter.onsave`: Controls whether the Jenkinsfile is checked immediately after it is saved (default: false).
+* `jenkins.pipeline.linter.onsave`: controls whether the Jenkinsfile is checked immediately after it is saved (default: false).
+* `jenkins.pipeline.linter.checkextensions`: you can control what file can be checked through this configuration. (default: `[".jenkinsfile", ".groovy", "Jenkinsfile"]`). It means that the file name being checked must contains one of them.
 
 ### example settings
 

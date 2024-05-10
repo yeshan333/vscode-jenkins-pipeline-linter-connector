@@ -1,5 +1,9 @@
 # Change Log
 
+### 2.1.0
+
+Refactor core logic & file guard.
+
 ### 2.0.0
 
 Refactor core logic.

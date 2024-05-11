@@ -1,5 +1,9 @@
 # Change Log
 
+### 2.2.0
+
+Fix Jenkinsfile returns unknown characters if it contains Chinese characters [https://github.com/yeshan333/vscode-jenkins-pipeline-linter-connector/issues/1](https://github.com/yeshan333/vscode-jenkins-pipeline-linter-connector/issues/1).
+
 ### 2.1.0
 
 Refactor core logic & file guard.

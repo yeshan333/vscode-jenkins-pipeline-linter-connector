@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import axios from 'axios';
 
-let FormData = require('form-data');
+var qs = require('qs');
 
 function requestWithCrumb(url: string, crumbUrl: string, user: string|undefined, pass: string|undefined, token: string|undefined, output: vscode.OutputChannel) {
 
@@ -63,18 +63,21 @@ function validateRequest(url: string, user: string|undefined, pass: string|undef
             return;
         }
 
-        let data = new FormData();
-        data.append('jenkinsfile', activeTextEditor.document.getText());
+        let data = qs.stringify({ 
+            'jenkinsfile': activeTextEditor.document.getText()
+        });
 
         console.log("========== Pipeline Content ==========")
-        console.log(activeTextEditor.document.getText())
+        console.log(data)
         console.log("========== Pipeline Content ==========")
 
         let options: any = {
             method: 'post',
             url: url,
             data : data,
-            headers: {}
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
         };
 
         if(crumb !== undefined && crumb.length > 0) {
@@ -95,7 +98,7 @@ function validateRequest(url: string, user: string|undefined, pass: string|undef
         console.log("======= start: Jenkinsfile validate options =======");
         console.log(options);
         console.log("=======  Jenkinsfile validate options :end  =======");
-
+        
         axios(options)
         .then((response: any) => {
             console.log(options);

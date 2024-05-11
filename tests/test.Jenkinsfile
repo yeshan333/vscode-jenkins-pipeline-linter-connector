@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Hello中文>>>>>') {
             steps {
-                echo 'Hello World'
+                echo 'Hello Worl中文
             }
-        }xxx
+        }
     }
 }

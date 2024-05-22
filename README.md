@@ -7,6 +7,7 @@ This extension validates Jenkinsfile by sending them to the [Jenkins Pipeline Li
 ## Features
 
 - Validate [declarative Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline) in [Visual Studio Code](https://code.visualstudio.com/).
+- Validate Review with LLMs.
 
 ## Example Usage
 
@@ -68,6 +69,28 @@ Scenario 4: Jenkins has API authentication enabled and CRSF protection enabled.
     "jenkins.pipeline.linter.connector.crumbUrl": "https://jenkins.shan333.cn/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"
 }
 ```
+
+### Enable review with LLM
+
+You can also enable linter with LLMs. We use the Cloudflare ("赛博佛祖") Workers AI REST API to get reviews of your Jenkinsfile. 
+
+![enable review with LLM](./images/validate_with_llm.png)
+
+This is an example configuration to enable this feature:
+
+```json
+{
+    "jenkins.pipeline.linter.connector.llm.enable": true,
+    "jenkins.pipeline.linter.connector.llm.baseUrl": "https://api.cloudflare.com/client/v4/accounts/<CF_ACCOUNT_ID>/ai/v1",
+    "jenkins.pipeline.linter.connector.llm.modelName": "@cf/meta/llama-2-7b-chat-fp16",
+    "jenkins.pipeline.linter.connector.llm.apiKey": "<CF_API_TOKEN>",
+}
+```
+
+* `jenkins.pipeline.linter.connector.llm.enable`: Whether to enable this feature (default: false).
+* `jenkins.pipeline.linter.connector.llm.baseUrl`: You can refer to this document to get your openapi -> [Get started with the Workers AI REST API](https://developers.cloudflare.com/workers-ai/get-started/rest-api/), We use [openapi compatibility](https://developers.cloudflare.com/workers-ai/configuration/open-ai-compatibility/) mode to call it.
+* `jenkins.pipeline.linter.connector.llm.modelName`: Any of the text generation model ID mentioned in this document -> [https://developers.cloudflare.com/workers-ai/models/#text-generation](https://developers.cloudflare.com/workers-ai/models/#text-generation), defailt is: `@cf/meta/llama-2-7b-chat-fp16`.
+* `jenkins.pipeline.linter.connector.llm.apiKey`: Your Cloudflare API token.
 
 ## Acknowledgements
 

@@ -4,9 +4,10 @@ import * as vscode from 'vscode';
 import axios from 'axios';
 
 var qs = require('qs');
+const { ChatOpenAI } = require("@langchain/openai");
+const { HumanMessage, SystemMessage } = require("@langchain/core/messages");
 
-function requestWithCrumb(url: string, crumbUrl: string, user: string|undefined, pass: string|undefined, token: string|undefined, output: vscode.OutputChannel) {
-
+async function requestWithCrumb(url: string, crumbUrl: string, user: string|undefined, pass: string|undefined, token: string|undefined, output: vscode.OutputChannel) {
     let options: any = {
         method: 'get',
         url: crumbUrl,
@@ -38,7 +39,7 @@ function requestWithCrumb(url: string, crumbUrl: string, user: string|undefined,
     });
 }
 
-function validateRequest(url: string, user: string|undefined, pass: string|undefined, token: string|undefined, crumb: string|undefined, output: vscode.OutputChannel) {
+async function validateRequest(url: string, user: string|undefined, pass: string|undefined, token: string|undefined, crumb: string|undefined, output: vscode.OutputChannel) {
     output.clear();
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor !== undefined) {
@@ -99,17 +100,44 @@ function validateRequest(url: string, user: string|undefined, pass: string|undef
         console.log(options);
         console.log("=======  Jenkinsfile validate options :end  =======");
         
+        let jenkinsLinterResult = "";
+        let llmSwitch = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.enable') as boolean | undefined;
+        
         axios(options)
         .then((response: any) => {
             console.log(options);
             console.log(response.data);
+            jenkinsLinterResult = response.data;
+            output.appendLine("Jenkins Pipeline Linter Result:");
             output.appendLine(response.data);
+            if(llmSwitch) {
+                output.appendLine("Waiting for LLM Assistant Answer...");
+            }
         })
         .catch((err: any) => {
             console.log(options);
             console.log(err);
             output.appendLine(err);
         });
+
+        
+        if(llmSwitch) {
+            process.env["OPENAI_BASE_URL"] = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.baseUrl') as string;
+            let modelName = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.modelName') as string;
+            let apiKey = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.apiKey') as string;
+
+            const model = new ChatOpenAI({modelName: modelName, streaming: false, apiKey: apiKey});
+            const system_prompt = "You are the core developer of the Jenkins open source software. You are familiar with the syntax of the Declarative Pipeline in: https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline. I will present a Jenkinsfile wrapped in []. Please give your professional review opinion with the syntax check results of Jenkinsfile Pipeline Linter wrapped in {}.";
+            
+            const messages = [
+                new SystemMessage(system_prompt),
+                new HumanMessage("Jenkins Pipeline Linter validate result is {" + jenkinsLinterResult + "}, You should review Jenkinsfile content is: [" + activeTextEditor.document.getText() + "]"),
+            ];
+
+            let resp = await model.invoke(messages);
+            console.log(resp);
+            output.appendLine("LLM Assistant Answer: \n" + resp.content.toString() + "\n");
+        }
     } else {
         output.appendLine('No active text editor. Open the jenkinsfile you want to validate.');
     }

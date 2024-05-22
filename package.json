@@ -68,6 +68,26 @@
                         "Jenkinsfile"
                     ],
                     "description": "Set lint file extension list"
+                },
+                "jenkins.pipeline.linter.connector.llm.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "enable linter with LLM"
+                },
+                "jenkins.pipeline.linter.connector.llm.baseUrl": {
+                    "type": "string",
+                    "default": "https://api.cloudflare.com/client/v4/accounts/<CF_ACCOUNT_ID>/ai/v1",
+                    "description": "LLM openapi base url, eg: https://api.cloudflare.com/client/v4/accounts/<CF_ACCOUNT_ID>/ai/v1"
+                },
+                "jenkins.pipeline.linter.connector.llm.modelName": {
+                    "type": "string",
+                    "default": "@cf/meta/llama-2-7b-chat-fp16",
+                    "description": "model name, eg: @cf/meta/llama-2-7b-chat-fp16, anyone model in: https://developers.cloudflare.com/workers-ai/models/#text-generation"
+                },
+                "jenkins.pipeline.linter.connector.llm.apiKey": {
+                    "type": "string",
+                    "default": "invalid-key",
+                    "description": "Cloudflare Worker AI API key (token)."
                 }
             }
         }
@@ -87,7 +107,10 @@
         "typescript": "^5.4.2"
     },
     "dependencies": {
+        "@langchain/openai": "^0.0.33",
         "axios": "^1.6.8",
-        "qs": "^6.12.1"
+        "langchain": "^0.2.0",
+        "qs": "^6.12.1",
+        "web-streams-polyfill": "^4.0.0"
     }
 }

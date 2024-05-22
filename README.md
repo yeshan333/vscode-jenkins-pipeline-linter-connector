@@ -7,7 +7,7 @@ This extension validates Jenkinsfile by sending them to the [Jenkins Pipeline Li
 ## Features
 
 - Validate [declarative Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline) in [Visual Studio Code](https://code.visualstudio.com/).
-- Validate Review with LLMs.
+- Review Jenkinsfile with LLMs.
 
 ## Example Usage
 

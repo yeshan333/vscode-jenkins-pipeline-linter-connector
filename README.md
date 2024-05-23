@@ -2,7 +2,7 @@
 
 [![Open VSX Version](https://img.shields.io/open-vsx/v/yeshan333/jenkins-pipeline-linter-connector-fork?label=Open%20VSX%20Registry%20Version)](https://open-vsx.org/extension/yeshan333/jenkins-pipeline-linter-connector-fork) [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/yeshan333.jenkins-pipeline-linter-connector-fork?logo=appveyor&label=Visual%20Studio%20Marketplace%20Version)](https://marketplace.visualstudio.com/items?itemName=yeshan333.jenkins-pipeline-linter-connector-fork)
 
-This extension validates Jenkinsfile by sending them to the [Jenkins Pipeline Linter](https://www.jenkins.io/doc/book/pipeline/development/#linter) of a Jenkins server.
+This extension validates Jenkinsfile by sending them to the [Jenkins Pipeline Linter](https://www.jenkins.io/doc/book/pipeline/development/#linter) of a Jenkins server. Also support to review Jenkinsfile with LLMs.
 
 ## Features
 

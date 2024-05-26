@@ -43,8 +43,7 @@ Scenario 2: Jenkins has API authentication enabled. Use a password for authentic
 {
     "jenkins.pipeline.linter.connector.url": "https://jenkins.shan333.cn/pipeline-model-converter/validate",
     "jenkins.pipeline.linter.connector.user": "jenkins_username",
-    "jenkins.pipeline.linter.connector.pass": "jenkins_password",
-    "jenkins.pipeline.linter.connector.token": "user_api_token"
+    "jenkins.pipeline.linter.connector.pass": "jenkins_password"
 }
 ```
 
@@ -64,7 +63,6 @@ Scenario 4: Jenkins has API authentication enabled and CRSF protection enabled.
 {
     "jenkins.pipeline.linter.connector.url": "https://jenkins.shan333.cn/pipeline-model-converter/validate",
     "jenkins.pipeline.linter.connector.user": "jenkins_username",
-    "jenkins.pipeline.linter.connector.pass": "jenkins_password",
     "jenkins.pipeline.linter.connector.token": "user_api_token",
     "jenkins.pipeline.linter.connector.crumbUrl": "https://jenkins.shan333.cn/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"
 }
@@ -72,7 +70,7 @@ Scenario 4: Jenkins has API authentication enabled and CRSF protection enabled.
 
 ### Enable review with LLM
 
-You can also enable linter with LLMs. We use the Cloudflare ("赛博佛祖") Workers AI REST API to get reviews of your Jenkinsfile. 
+You can also enable linter with LLMs. We use the free Cloudflare ("赛博佛祖") Workers AI REST API to get reviews of your Jenkinsfile. 
 
 ![enable review with LLM](./images/validate_with_llm.png)
 

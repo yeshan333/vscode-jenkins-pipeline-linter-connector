@@ -127,11 +127,11 @@ async function validateRequest(url: string, user: string|undefined, pass: string
             let apiKey = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.apiKey') as string;
 
             const model = new ChatOpenAI({modelName: modelName, streaming: false, apiKey: apiKey});
-            const system_prompt = "You are the core developer of the Jenkins open source software. You are familiar with the syntax of the Declarative Pipeline in: https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline. I will present a Jenkinsfile wrapped in []. Please give your professional review opinion with the syntax check results of Jenkinsfile Pipeline Linter wrapped in {}.";
+            const system_prompt = "You're the core developer of Jenkins open source software. You are familiar with the syntax of Jenkins declarative Pipeline. Jenkins Pipeline Linter can check the contents of the Jenkinsfile and indicate if there are any syntax errors. I will put the inspection results of Jenkins Pipeline Linter in {}. Please give professional review opinions based on the inspection results of Jenkins Pipeline Linter Linter and the content of Jenkinsfile wrapped in [].";
             
             const messages = [
                 new SystemMessage(system_prompt),
-                new HumanMessage("Jenkins Pipeline Linter validate result is {" + jenkinsLinterResult + "}, You should review Jenkinsfile content is: [" + activeTextEditor.document.getText() + "]"),
+                new HumanMessage("Jenkins Pipeline Linter validate result is {" + jenkinsLinterResult + "}, You should review Jenkinsfile content is: [" + activeTextEditor.document.getText() + "]. Please provide your code review feedback."),
             ];
 
             let resp = await model.invoke(messages);

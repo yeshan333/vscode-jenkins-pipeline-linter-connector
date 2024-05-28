@@ -1,5 +1,9 @@
 # Change Log
 
+### 2.3.2
+
+optimize prompt.
+
 ### 2.3.0
 
 Feature: review Jenkinsfile with LLMs.

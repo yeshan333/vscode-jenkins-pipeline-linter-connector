@@ -2,7 +2,7 @@
     "name": "jenkins-pipeline-linter-connector-fork",
     "displayName": "Jenkins Pipeline Linter Connector (fork)",
     "description": "Validate declarative Jenkinsfile syntax in Visual Studio Code. Also support to review Jenkinsfile with LLMs.",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "icon": "images/icon.png",
     "publisher": "yeshan333",
     "license": "LICENSE.txt",

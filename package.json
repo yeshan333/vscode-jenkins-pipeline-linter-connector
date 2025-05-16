@@ -88,12 +88,18 @@
                     "type": "string",
                     "default": "invalid-key",
                     "description": "Cloudflare Worker AI API key (token)."
+                },
+                "jenkins.pipeline.linter.connector.llm.respLangCode": {
+                    "type": "string",
+                    "default": "en",
+                    "description": "llm response language (lang code), eg: en, zh-hans, ja, ko"
                 }
             }
         }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
+        "vscode:buildvsx": "npx @vscode/vsce package",
         "compile": "tsc -p ./",
         "lint": "eslint \"src/**/*.ts\"",
         "watch": "tsc -watch -p ./"

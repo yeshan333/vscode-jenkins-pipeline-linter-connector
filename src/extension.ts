@@ -111,7 +111,9 @@ async function validateRequest(url: string, user: string|undefined, pass: string
             output.appendLine("Jenkins Pipeline Linter Result:");
             output.appendLine(response.data);
             if(llmSwitch) {
+                let respLangCode = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.respLangCode') as string;
                 output.appendLine("Waiting for LLM Assistant Answer...");
+                output.appendLine("Response Language Code: " + respLangCode);
             }
         })
         .catch((err: any) => {
@@ -125,9 +127,10 @@ async function validateRequest(url: string, user: string|undefined, pass: string
             process.env["OPENAI_BASE_URL"] = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.baseUrl') as string;
             let modelName = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.modelName') as string;
             let apiKey = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.apiKey') as string;
+            let respLangCode = vscode.workspace.getConfiguration().get('jenkins.pipeline.linter.connector.llm.respLangCode') as string;
 
             const model = new ChatOpenAI({modelName: modelName, streaming: false, apiKey: apiKey});
-            const system_prompt = "You're the core developer of Jenkins open source software. You are familiar with the syntax of Jenkins declarative Pipeline. Jenkins Pipeline Linter can check the contents of the Jenkinsfile and indicate if there are any syntax errors. I will put the inspection results of Jenkins Pipeline Linter in {}. Please give professional review opinions based on the inspection results of Jenkins Pipeline Linter Linter and the content of Jenkinsfile wrapped in [].";
+            const system_prompt = "You're the core developer of Jenkins open source software. You are familiar with the syntax of Jenkins declarative Pipeline. Jenkins Pipeline Linter can check the contents of the Jenkinsfile and indicate if there are any syntax errors. I will put the inspection results of Jenkins Pipeline Linter in {}. Please give professional review opinions based on the inspection results of Jenkins Pipeline Linter Linter and the content of Jenkinsfile wrapped in []. Always response with language " + respLangCode;
             
             const messages = [
                 new SystemMessage(system_prompt),

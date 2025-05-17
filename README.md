@@ -1,6 +1,6 @@
 # jenkins-pipeline-linter-connector
 
-[![Open VSX Version](https://img.shields.io/open-vsx/v/yeshan333/jenkins-pipeline-linter-connector-fork?label=Open%20VSX%20Registry%20Version)](https://open-vsx.org/extension/yeshan333/jenkins-pipeline-linter-connector-fork) [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/yeshan333.jenkins-pipeline-linter-connector-fork?logo=appveyor&label=Visual%20Studio%20Marketplace%20Version)](https://marketplace.visualstudio.com/items?itemName=yeshan333.jenkins-pipeline-linter-connector-fork)
+[![Open VSX Version](https://img.shields.io/open-vsx/v/yeshan333/jenkins-pipeline-linter-connector-fork?label=Open%20VSX%20Registry%20Version)](https://open-vsx.org/extension/yeshan333/jenkins-pipeline-linter-connector-fork) [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/yeshan333.jenkins-pipeline-linter-connector-fork?logo=appveyor&label=Visual%20Studio%20Marketplace%20Version)](https://marketplace.visualstudio.com/items?itemName=yeshan333.jenkins-pipeline-linter-connector-fork) | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/yeshan333/vscode-jenkins-pipeline-linter-connector)
 
 This extension validates Jenkinsfile by sending them to the [Jenkins Pipeline Linter](https://www.jenkins.io/doc/book/pipeline/development/#linter) of a Jenkins server. Also support to review Jenkinsfile with LLMs.
 
@@ -8,6 +8,8 @@ This extension validates Jenkinsfile by sending them to the [Jenkins Pipeline Li
 
 - Validate [declarative Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline) in [Visual Studio Code](https://code.visualstudio.com/).
 - Review Jenkinsfile with LLMs.
+
+![internal](images/internal.jpg)
 
 ## Example Usage
 

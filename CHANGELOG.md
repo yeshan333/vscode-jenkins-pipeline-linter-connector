@@ -1,5 +1,9 @@
 # Change Log
 
+### 2.4.0
+
+Feature: support custom LLMs response language.
+
 ### 2.3.2
 
 optimize prompt.

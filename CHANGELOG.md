@@ -1,6 +1,10 @@
 # Change Log
 
-### 2.4.0~2.4.1
+### 2.4.3
+
+Fix axios dependency for https://github.com/yeshan333/vscode-jenkins-pipeline-linter-connector/issues.
+
+### 2.4.0
 
 Feature: support custom LLMs response language.
 

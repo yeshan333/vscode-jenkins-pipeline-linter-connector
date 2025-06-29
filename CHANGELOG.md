@@ -1,5 +1,9 @@
 # Change Log
 
+### 2.5.0
+
+Use esbuild to reduce vsx bundle size. 
+
 ### 2.4.3
 
 Fix axios dependency for https://github.com/yeshan333/vscode-jenkins-pipeline-linter-connector/issues.

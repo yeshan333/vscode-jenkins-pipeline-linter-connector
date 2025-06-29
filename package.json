@@ -2,7 +2,7 @@
     "name": "jenkins-pipeline-linter-connector-fork",
     "displayName": "Jenkins Pipeline Linter Connector (fork)",
     "description": "Validate declarative Jenkinsfile syntax in Visual Studio Code. Also support to review Jenkinsfile with LLMs.",
-    "version": "2.4.3",
+    "version": "2.5.0",
     "icon": "images/icon.png",
     "publisher": "yeshan333",
     "license": "LICENSE.txt",
@@ -98,17 +98,20 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
+        "vscode:prepublish": "npm run package",
         "vscode:buildvsx": "npx @vscode/vsce package",
-        "compile": "tsc -p ./",
-        "lint": "eslint \"src/**/*.ts\"",
-        "watch": "tsc -watch -p ./"
+        "compile": "npm run build",
+        "build": "node esbuild.js",
+        "watch": "node esbuild.js --watch",
+        "package": "node esbuild.js --production",
+        "lint": "eslint \"src/**/*.ts\""
     },
     "devDependencies": {
         "@types/node": "^18",
         "@types/vscode": "^1.89.0",
         "@typescript-eslint/eslint-plugin": "^6.7.0",
         "@typescript-eslint/parser": "^6.7.0",
+        "esbuild": "^0.25.5",
         "eslint": "^8.26.0",
         "typescript": "^5.4.2"
     },
